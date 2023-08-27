@@ -17,7 +17,7 @@ export type GridConstructor = (
 			matrix: undefined;
 	  }
 	| {
-			matrix: (0 | 1)[][];
+			matrix: number[][];
 			width: undefined;
 			height: undefined;
 	  }
