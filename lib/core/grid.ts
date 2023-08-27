@@ -12,7 +12,8 @@ export class Grid {
 
 	constructor(aParams: GridConstructor) {
 		// Set the general properties
-		if (aParams.matrix) {
+		// TODO: find a better way than "in" statements
+		if ("matrix" in aParams) {
 			this.width = aParams.matrix[0].size();
 			this.height = aParams.matrix.size();
 			this.numberOfFields = this.width * this.height;
@@ -27,7 +28,7 @@ export class Grid {
 			this.width,
 			this.height,
 			aParams.densityOfObstacles ?? 0,
-			aParams.matrix,
+			"matrix" in aParams ? aParams.matrix : undefined,
 		);
 	}
 
@@ -48,9 +49,9 @@ export class Grid {
 		let id: number = 0;
 
 		// Generate an empty matrix
-		for (let y = 0; y < height; y++) {
+		for (const y of $range(0, height - 1)) {
 			newGrid[y] = [];
-			for (let x = 0; x < width; x++) {
+			for (const x of $range(0, width - 1)) {
 				newGrid[y][x] = new Node({
 					id: id,
 					position: { x: x, y: y },
@@ -65,8 +66,8 @@ export class Grid {
 		 * loop through our grid and set random obstacles.
 		 */
 		if (matrix === undefined) {
-			for (let y = 0; y < height; y++) {
-				for (let x = 0; x < width; x++) {
+			for (const y of $range(0, height - 1)) {
+				for (const x of $range(0, width - 1)) {
 					const rndNumber = math.floor(math.random() * 10) + 1;
 					if (rndNumber > 10 - densityOfObstacles) {
 						newGrid[y][x].setIsWalkable(false);
@@ -83,8 +84,8 @@ export class Grid {
 		 * In case we have a matrix loaded.
 		 * Load up the informations of the matrix.
 		 */
-		for (let y = 0; y < height; y++) {
-			for (let x = 0; x < width; x++) {
+		for (const y of $range(0, height - 1)) {
+			for (const x of $range(0, width - 1)) {
 				newGrid[y][x].setIsWalkable(matrix[y][x] ? false : true);
 			}
 		}
@@ -129,8 +130,8 @@ export class Grid {
 		const minY = currentPosition.y - 1;
 		const maxY = currentPosition.y + 1;
 
-		for (let y = minY; y <= maxY; y++) {
-			for (let x = minX; x <= maxX; x++) {
+		for (const y of $range(minY, maxY)) {
+			for (const x of $range(minX, maxX)) {
 				// Evaluate if NOT current position
 				if (x !== currentPosition.x || y !== currentPosition.y) {
 					// Evaluate if current position is on the grid AND walkable
@@ -157,8 +158,8 @@ export class Grid {
 	 * Reset the grid
 	 */
 	public resetGrid(): void {
-		for (let y = 0; y < this.gridNodes.size(); y++) {
-			for (let x = 0; x < this.gridNodes[y].size(); x++) {
+		for (const y of $range(0, this.gridNodes.size() - 1)) {
+			for (const x of $range(0, this.gridNodes[y].size() - 1)) {
 				this.gridNodes[y][x].setIsOnClosedList(false);
 				this.gridNodes[y][x].setIsOnOpenList(false);
 				this.gridNodes[y][x].setParent(undefined);
@@ -181,9 +182,9 @@ export class Grid {
 		const clonedGrid: Node[][] = [];
 		let nodeId: number = 0;
 
-		for (let y = 0; y < this.height; y++) {
+		for (const y of $range(0, this.height - 1)) {
 			clonedGrid[y] = [];
-			for (let x = 0; x < this.width; x++) {
+			for (const x of $range(0, this.width - 1)) {
 				clonedGrid[y][x] = new Node({
 					id: nodeId,
 					position: { x: x, y: y },

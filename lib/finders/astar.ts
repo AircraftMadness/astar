@@ -1,5 +1,3 @@
-import { Array } from "@rbxts/sift";
-
 import { backtrace } from "../core/util";
 import { calculateHeuristic } from "../core/heuristic";
 import { Grid } from "../core/grid";
@@ -73,8 +71,8 @@ export class AStarFinder {
 		// Loop through the grid
 		// Set the FGH values of non walkable nodes to zero and push them on the closed list
 		// Set the H value for walkable nodes
-		for (let y = 0; y < this.grid.height; y++) {
-			for (let x = 0; x < this.grid.width; x++) {
+		for (const y of $range(0, this.grid.height - 1)) {
+			for (const x of $range(0, this.grid.width - 1)) {
 				const node = this.grid.getNodeAt({ x, y });
 				if (!this.grid.isWalkableAt({ x, y })) {
 					// OK, this node is not walkable
@@ -100,7 +98,7 @@ export class AStarFinder {
 
 			// Move current node from open list to closed list
 			currentNode.setIsOnOpenList(false);
-			Array.removeValue(this.openList, currentNode);
+			this.openList = this.openList.filter((node) => node.id !== currentNode.id);
 
 			currentNode.setIsOnClosedList(true);
 			this.closedList.push(currentNode);

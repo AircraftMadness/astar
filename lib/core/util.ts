@@ -1,5 +1,14 @@
-import { Array } from "@rbxts/sift";
 import { Node } from "./node";
+
+function reverseArray<T extends defined>(array: T[]): T[] {
+	const result = new Array<T>();
+
+	for (const i of $range(array.size() - 1, 0, -1)) {
+		result.push(array[i]);
+	}
+
+	return result;
+}
 
 /**
  * Backtrace from end node through parents and return the path.
@@ -24,5 +33,5 @@ export function backtrace(node: Node, includeStartNode: boolean, includeEndNode:
 		path.push([currentNode.position.x, currentNode.position.y]);
 	}
 
-	return Array.reverse(path);
+	return reverseArray(path);
 }

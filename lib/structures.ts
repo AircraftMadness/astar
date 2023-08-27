@@ -14,12 +14,9 @@ export type GridConstructor = (
 	| {
 			width: number;
 			height: number;
-			matrix: undefined;
 	  }
 	| {
 			matrix: number[][];
-			width: undefined;
-			height: undefined;
 	  }
 ) & { densityOfObstacles?: number };
 

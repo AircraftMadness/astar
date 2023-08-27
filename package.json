@@ -6,7 +6,7 @@
   "main": "out/init.lua",
   "types": "out/index.d.ts",
   "scripts": {
-    "prepublishOnly": "rbxtsc",
+    "prepare": "rbxtsc",
     "build": "rbxtsc",
     "dev": "rbxtsc -w --verbose"
   },
@@ -16,9 +16,6 @@
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@rbxts/sift": "0.0.6"
   },
   "devDependencies": {
     "@rbxts/compiler-types": "2.1.1-types.0",
