@@ -1,39 +1,44 @@
 {
-  "name": "astar-typescript",
+  "name": "@rbxts/astar",
   "version": "1.2.7",
   "description": "A*(a-star) pathfinding in TypeScript",
-  "keywords": [
-    "A-star",
-    "A*",
-    "Algorithm",
-    "Graph",
-    "Pathfinding",
-    "Search",
-    "Shakey",
-    "Traversal",
-    "TypeScript"
-  ],
-  "bugs": {
-    "email": "digit.sensitivee@gmail.com"
-  },
   "license": "MIT",
-  "author": "digitsensitive <digit.sensitivee@gmail.com>",
-  "main": "dist/astar.js",
-  "types": "dist/astar.d.ts",
+  "main": "out/init.lua",
+  "types": "out/index.d.ts",
   "scripts": {
-    "prepare": "tsc",
-    "build": "tsc",
-    "run-example": "cd example && yarn install && yarn run dev"
+    "prepublishOnly": "rbxtsc",
+    "build": "rbxtsc",
+    "dev": "rbxtsc -w --verbose"
+  },
+  "files": [
+    "out",
+    "!**/*.tsbuildinfo"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
-    "lodash": "4.17.21"
+    "@rbxts/sift": "0.0.6"
   },
   "devDependencies": {
-    "typescript": "5.0.4"
+    "@rbxts/compiler-types": "2.1.1-types.0",
+    "@rbxts/types": "1.0.712",
+    "@typescript-eslint/eslint-plugin": "6.4.1",
+    "@typescript-eslint/parser": "6.4.1",
+    "eslint": "8.48.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-roblox-ts": "0.0.35",
+    "prettier": "3.0.2",
+    "roblox-ts": "2.1.1",
+    "typescript": "4.9.4"
+  },
+  "resolutions": {
+    "typescript": "4.9.4"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitsensitive/astar-typescript.git"
+    "url": "https://github.com/AircraftMadness/astar.git"
   },
-  "homepage": "https://github.com/digitsensitive/astar-typescript#readme"
+  "homepage": "https://github.com/AircraftMadness/astar#readme"
 }
